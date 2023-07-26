@@ -50,7 +50,6 @@
 </template>
 
 <script>
-	import { us,os } from '@/common/util/work.js'
 	import socket from '@/common/js-sdk/socket/socket.js'
 	export default {
 		name: 'home',
@@ -79,8 +78,8 @@
 				  {icon: 'line2_icon1.png', title: '审批', 'text': '个人审批'},
 				  {icon: 'line2_icon2.png', title: '审批稿', 'text': '审批草稿箱'},
 				],
-				usList:us.data,
-				osList:os.data,
+				usList: {},
+				osList: {},
 				msgCount:0,
 				dot:{
 				  mailHome:false

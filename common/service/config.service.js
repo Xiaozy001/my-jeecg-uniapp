@@ -3,7 +3,7 @@ let BASE_URL = ''
 
 if (process.env.NODE_ENV == 'development') {
     BASE_URL = 'http://127.0.0.1:8080/jeecg-boot' // 开发环境
-	// BASE_URL = 'BASE_URL = 'https://www.xzyfh.top/jeecg-boot'; 
+	// BASE_URL = 'https://www.xzyfh.top/jeecg-boot'; 
 } else {
 	BASE_URL = 'http://boot.jeecg.org:8080/jeecg-boot' // 生产环境
 }

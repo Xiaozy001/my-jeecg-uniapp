@@ -1,5 +1,5 @@
 {
-    "name" : "即日办",
+    "name" : "发货小程序",
     "appid" : "__UNI__44A8AB0",
     "description" : "",
     "versionName" : "2.2.22",
@@ -63,7 +63,7 @@
     "quickapp" : {},
     /* 快应用特有相关 */
     "mp-weixin" : {
-        "appid" : "wx2ba5c5690b35d173",
+        "appid" : "wxa30490c150bdbdd5",
         "setting" : {
             "urlCheck" : false,
             "es6" : true
@@ -72,7 +72,8 @@
             "scope.userLocation" : {
                 "desc" : "有定位功能需要导航定位"
             }
-        }
+        },
+        "lazyCodeLoading" : "requiredComponents"
     },
     "h5" : {
         "title" : "Do it today",

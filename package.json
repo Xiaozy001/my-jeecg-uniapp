@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "moment": "^2.29.4",
     "sortablejs": "^1.15.0",
     "vue-jsonp": "^2.0.0"
   }

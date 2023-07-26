@@ -82,6 +82,7 @@
 
 <script>
 	import {http} from '@/common/service/service.js'
+	import moment from 'moment'
 	export default {
 		data() {
 			return {
@@ -117,7 +118,7 @@
 			},
 			addloadTime() {
 				var nowtime=new Date();
-				this.carsData.loadTime = nowtime.getFullYear()+'-'+this.addZero(nowtime.getMonth()+1)+'-'+this.addZero(nowtime.getDate())+' '+this.addZero(nowtime.getHours())+':'+this.addZero(nowtime.getMinutes())+':'+this.addZero(nowtime.getSeconds());
+				this.carsData.loadTime = moment(nowtime).format('YYYY-MM-DD HH:mm:ss');
 			},
 			onSubmit(){
 				console.log(this.carsData.address)

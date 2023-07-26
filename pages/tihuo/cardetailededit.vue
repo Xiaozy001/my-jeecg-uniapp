@@ -132,12 +132,9 @@
 </template>
 
 <script>
-	import {
-		http
-	} from '@/common/service/service.js'
-	import {
-		states
-	} from '@/pages/tihuo/orderstate.js'
+	import {http} from '@/common/service/service.js'
+	import {states} from '@/pages/tihuo/orderstate.js'
+	import moment from 'moment'
 	export default {
 		data() {
 			return {
@@ -187,10 +184,14 @@
 			let obj = e.data
 			this.cardetaillist = JSON.parse(obj)
 			console.log(this.cardetaillist)
-			this.cardetaillistedit = this.cardetaillist
-			this.cardetaillistedit.truckTime=new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDay()+' '+new Date().getHours()+':'+new Date().getMinutes()+':'+new Date().getSeconds()
-		},
+			this.carDetailInit()
+			},
 		methods: {
+			carDetailInit() {
+				this.cardetaillistedit = this.cardetaillist
+				var nowtime = new Date();
+				this.cardetaillistedit.truckTime=moment(nowtime).format('YYYY-MM-DD HH:mm:ss')
+			},
 			onSubmit() {
 				if (this.cardetaillistedit.bladeType != this.cardetaillistedit.type){
 					let msg ="请确认输入的叶型是否一致"

@@ -2,6 +2,10 @@
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/login/login",
+			"style": {}
+		}, 
+		{
 			"path": "pages/index/index",
 			"style": {}
 		},
@@ -88,85 +92,108 @@
 		{
 			"path": "pages/component/steps",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/plugin/indexes",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/plugin/animation",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/plugin/drawer",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/plugin/verticalnav",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/home/home",
 			"style": {}
-		}, {
-			"path": "pages/login/login",
-			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/user/userexit",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/user/userdetail",
 			"style": {}
-		},{
+		},
+		{
 			"path": "pages/user/useredit",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/user/people",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/common/exit",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/common/success",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/carstable",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/carlist",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/station",
 			"style": {}
-		}, {
+		},
+		{
 			"path": "pages/tihuo/waithandorder",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/carstablelist",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/carlistdetailed",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/loadinfo",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/checkorder",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/checkorderhandle",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/cardetailededit",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/loadinfolist",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/orderabnormal",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/ordersort",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/tihuo/orderconfirm",
 			"style": {}
-		}, {
+		}, 
+		{
 			"path": "pages/user/location",
 			"style": {},
 			"permission": {
@@ -174,30 +201,36 @@
 				  "desc": "你的位置信息将用于小程序位置接口的效果展示" // 高速公路行驶持续后台定位
 				}
 			  }
-		},{
+		},
+		{
 			"path": "pages/addressbook/address-book",
 			"style": {}
-		},{
+		},
+		{
 			"path": "pages/addressbook/level-address-book",
 			"style": {}
 		},
 		{
 			"path": "pages/addressbook/member",
 			"style": {}
-		},{
+		},
+		{
 			"path": "pages/addressbook/address-detail",
 			"style": {}
-		},{
+		},
+		{
 			"path": "pages/annotation/annotationList",
 			"style": {
 				"app-plus" : {
 					"bounce" : "none" //删除此项: mescroll-body支持iOS回弹
 				}
 			}
-		},{
+		},
+		{
 			"path": "pages/annotation/annotationDetail",
 			"style": {}
-		},{
+		},
+		{
 			"path": "pages/common/helloWorld",
 			"style": {}
 		}
