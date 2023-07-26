@@ -134,7 +134,7 @@
 							   id:0,
 						   　　latitude:that.latitude,//纬度
 						   　　longitude:that.longitude,//经度
-						       iconPath: '/static/location.png',
+						       iconPath: 'https://www.xzyfh.top/appimgs/static/location.png',
 							   width:35,
 							   height:35,
 							   // #ifdef MP-WEIXIN

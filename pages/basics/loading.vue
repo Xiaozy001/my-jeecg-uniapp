@@ -41,7 +41,7 @@
 		</view>
 		<view class="cu-load load-modal" v-if="loadModal">
 			<!-- <view class="cuIcon-emojifill text-orange"></view> -->
-			<image src="/static/logo.png" mode="aspectFit"></image>
+			<image src="https://www.xzyfh.top/appimgs/static/logo.png" mode="aspectFit"></image>
 			<view class="gray-text">加载中...</view>
 		</view>
 		<view class="cu-bar bg-white margin-top">

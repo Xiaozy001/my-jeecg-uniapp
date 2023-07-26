@@ -74,7 +74,7 @@ export default class Tips {
   static alert(title) {
     uni.showToast({
       title: title,
-      image: "../../static/alert.png",
+      image: "https://www.xzyfh.top/appimgs/static/alert.png",
       mask: true,
       duration: 1500
     });
@@ -87,7 +87,7 @@ export default class Tips {
   static error(title, onHide) {
     uni.showToast({
       title: title,
-      image: "../../static/error.png",
+      image: "https://www.xzyfh.top/appimgs/static/error.png",
       mask: true,
       duration: 1500
     });

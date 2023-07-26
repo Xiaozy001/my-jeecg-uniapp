@@ -117,7 +117,7 @@
 					console.log("res",res)
 					 if (res.data.success) {
 						let perArr = res.data.result
-				        let avatar=(perArr.avatar && perArr.avatar.length > 0)? api.getFileAccessHttpUrl(perArr.avatar):'/static/avatar_boy.png'
+				        let avatar=(perArr.avatar && perArr.avatar.length > 0)? api.getFileAccessHttpUrl(perArr.avatar):'https://www.xzyfh.top/appimgs/static/avatar_boy.png'
 						this.personalList.avatar =avatar
 						this.personalList.realname = perArr.realname
 						this.personalList.username = perArr.username
@@ -151,10 +151,10 @@
 <style>
 .UCenter-bg {
 	/* #ifdef MP-WEIXIN */
-	background-image: url('https://static.jeecg.com/upload/test/blue_1595818030310.png');
+	background-image: url('https://www.xzyfh.top/appimgs/static/blue.png');
 	/* #endif */
 	/* #ifndef MP-WEIXIN */
-	background-image: url('/static/blue.png');
+	background-image: url('https://www.xzyfh.top/appimgs/static/blue.png');
 	/* #endif */
   background-size: cover;
   height: 400rpx;

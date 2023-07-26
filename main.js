@@ -40,7 +40,8 @@ Vue.component('myImageUpload',myImageUpload)
 import myPage from './components/my-componets/my-page.vue'
 Vue.component('myPage',myPage)
 
-
+import myDate from './components/my-componets/my-date.vue'
+Vue.component('myDate',myDate)
 
 import basics from './pages/basics/home.vue'
 Vue.component('basics',basics)

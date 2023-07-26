@@ -7,7 +7,7 @@ import MescrollEmpty from '@/components/mescroll-uni/components/mescroll-empty.v
 -->
 <template>
 	<view class="mescroll-empty" :class="{ 'empty-fixed': option.fixed }" :style="{ 'z-index': option.zIndex, top: option.top }">
-		<image v-if="icon" class="empty-icon" src="/static/nocontent-1.png" mode="widthFix" />
+		<image v-if="icon" class="empty-icon" src="https://www.xzyfh.top/appimgs/static/nocontent-1.png" mode="widthFix" />
 		<view v-if="tip" class="empty-tip">{{ tip }}</view>
 		<view v-if="option.btnText" class="empty-btn" @click="emptyClick">{{ option.btnText }}</view>
 	</view>

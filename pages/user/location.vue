@@ -28,7 +28,7 @@
 			   　　id:0,
 			   　　latitude: 40.009704,//纬度
 			   　　longitude: 116.374999,//经度
-			   　　iconPath: '/static/location.png',    //显示的图标        
+			   　　iconPath: 'https://www.xzyfh.top/appimgs/static/location.png',    //显示的图标        
 			   　　rotate:0,   // 旋转度数
 			   　　width:20,   //宽
 			   　　height:20,   //高
@@ -64,7 +64,7 @@
 		   scale:16,//地图缩放程度
 	   　 　controls:[{//在地图上显示控件，控件不随着地图移动
 		  　　id:1,//控件id
-		  　　iconPath:'/static/login3.png',//显示的图标
+		  　　iconPath:'https://www.xzyfh.top/appimgs/static/login3.png',//显示的图标
 		      clickable:true,
 		  　　position:{//控件在地图的位置
 			 　　left:15,

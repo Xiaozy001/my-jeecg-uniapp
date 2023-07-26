@@ -124,7 +124,49 @@
 		}, {
 			"path": "pages/common/success",
 			"style": {}
-		},{
+		}, {
+			"path": "pages/tihuo/carstable",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/carlist",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/station",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/waithandorder",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/carstablelist",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/carlistdetailed",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/loadinfo",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/checkorder",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/checkorderhandle",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/cardetailededit",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/loadinfolist",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/orderabnormal",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/ordersort",
+			"style": {}
+		}, {
+			"path": "pages/tihuo/orderconfirm",
+			"style": {}
+		}, {
 			"path": "pages/user/location",
 			"style": {},
 			"permission": {

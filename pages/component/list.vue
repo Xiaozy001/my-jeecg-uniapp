@@ -96,7 +96,7 @@
 				</view>
 				<view class="cu-item" :class="menuArrow?'arrow':''">
 					<view class="content">
-						<image src="/static/logo.png" class="png" mode="aspectFit"></image>
+						<image src="https://www.xzyfh.top/appimgs/static/logo.png" class="png" mode="aspectFit"></image>
 						<text class="text-grey">图片 + 标题</text>
 					</view>
 				</view>

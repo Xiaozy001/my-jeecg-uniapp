@@ -14,7 +14,7 @@
 		<!-- 展示部门和用户 -->
 		<view class="cu-list menu sm-border">
 			<view class="cu-item" v-for="(item, index) in comList" :key="item.key" @tap="goMember(item)">
-				<image class="line2-icon" src="/static/folder.png"></image>
+				<image class="line2-icon" src="https://www.xzyfh.top/appimgs/static/folder.png"></image>
 				<view class="content margin-left-sm">
 					<view class="text-grey">{{item.title}}</view>
 				</view>

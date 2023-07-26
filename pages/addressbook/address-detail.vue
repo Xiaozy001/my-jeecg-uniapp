@@ -60,7 +60,7 @@
 				email,
 				company,
 				NavBarColor:this.NavBarColor,
-				avatar:'/static/login4.png',
+				avatar:'https://www.xzyfh.top/appimgs/static/login4.png',
 				modalName: null,
 				infoList:{
 					realname:'',

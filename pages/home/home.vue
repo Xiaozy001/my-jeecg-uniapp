@@ -68,11 +68,12 @@
 		},
 		data() {
 			return {
+			url: '/roleicon/roleIcon/roleIconquery',
 			 swiperList: [
-				  {id:1,type: 'image',url: '/static/banner/banner1.png', link: ''},
-				  {id:2,type: 'image',url: '/static/banner/banner2.jpg', link: ''},
-				  {id:3,type: 'image',url: '/static/banner/banner3.jpg', link: ''},
-				  {id:4,type: 'image',url: '/static/banner/banner4.jpg', link: ''},
+				  {id:1,type: 'image',url: 'https://www.xzyfh.top/appimgs/static/banner/banner1.png', link: ''},
+				  {id:2,type: 'image',url: 'https://www.xzyfh.top/appimgs/static/banner/banner2.jpg', link: ''},
+				  {id:3,type: 'image',url: 'https://www.xzyfh.top/appimgs/static/banner/banner3.jpg', link: ''},
+				  {id:4,type: 'image',url: 'https://www.xzyfh.top/appimgs/static/banner/banner4.jpg', link: ''},
 				],
 				middleApps: [
 				  {icon: 'line2_icon1.png', title: '审批', 'text': '个人审批'},
@@ -92,6 +93,18 @@
 			    this.onSocketOpen()
 			    this.onSocketReceive()
 			    this.loadCount(0);
+				this.osandusList();
+			},
+			osandusList() {
+			  this.$http.get(this.url).then(res => {
+				if (res.data.success) {
+				  console.log(res.data);
+				  this.usList = res.data.result[0];
+				  this.osList = res.data.result[1];
+				} else {
+				  this.$tip.alert(res.data.message);
+				}
+			  });
 			},
 			goPage(page){
 				if(!page){
