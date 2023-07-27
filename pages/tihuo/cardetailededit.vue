@@ -110,13 +110,13 @@
 					<view class="title">工装编号:</view>
 					<input name="input" v-model="cardetaillistedit.frockNum" placeholder="请输入工装编号" />
 				</view>
-				<view class="cu-item animation-slide-bottom">
-					<view class="content">
-						<text class="text-grey">装车完成时间</text>
-					</view>
-					<view class="action">
-						<text class="text-grey">{{cardetaillistedit.truckTime}}</text>
-					</view>
+				<view class="cu-form-group">
+					<view class="title">装车开始时间:</view>
+				<my-date v-model="cardetaillistedit.startTime" placeholder="请选择装车开始时间" fields="minute"></my-date>
+				</view>
+				<view class="cu-form-group">
+					<view class="title">装车完成时间:</view>
+				<my-date v-model="cardetaillistedit.truckTime" placeholder="请选择装车完成时间" fields="minute"></my-date>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">订单顺序:</view>
@@ -174,8 +174,9 @@
 					bladeNum:'',
 					serialNum:'',
 					frockNum:'',
-					truckTime:'',
-					station:''
+					startTime: '',
+					truckTime: '',
+					station: ''
 				}
 			}
 		},

@@ -192,6 +192,10 @@
 		{
 			"path": "pages/tihuo/orderconfirm",
 			"style": {}
+		},
+		{
+		 	"path": "pages/tihuo/transportcertification",
+		 	"style": {}
 		}, 
 		{
 			"path": "pages/user/location",
@@ -234,8 +238,7 @@
 			"path": "pages/common/helloWorld",
 			"style": {}
 		}
-		
-	],
+    ],
 	"globalStyle": {
 		"mp-alipay": {
 			/* 支付宝小程序特有相关 */
