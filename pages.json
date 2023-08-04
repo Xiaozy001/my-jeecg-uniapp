@@ -162,10 +162,6 @@
 			"style": {}
 		}, 
 		{
-			"path": "pages/tihuo/loadinfo",
-			"style": {}
-		}, 
-		{
 			"path": "pages/tihuo/checkorder",
 			"style": {}
 		}, 
@@ -175,10 +171,6 @@
 		}, 
 		{
 			"path": "pages/tihuo/cardetailededit",
-			"style": {}
-		}, 
-		{
-			"path": "pages/tihuo/loadinfolist",
 			"style": {}
 		}, 
 		{
@@ -197,6 +189,14 @@
 		 	"path": "pages/tihuo/transportcertification",
 		 	"style": {}
 		}, 
+		{
+		 	"path": "pages/tihuo/transportcertificationhandle",
+		 	"style": {}
+		}, 
+		{
+		 	"path": "pages/tihuo/transportcertificationlist",
+		 	"style": {}
+		},
 		{
 			"path": "pages/user/location",
 			"style": {},
@@ -233,10 +233,6 @@
 		{
 			"path": "pages/annotation/annotationDetail",
 			"style": {}
-		},
-		{
-			"path": "pages/common/helloWorld",
-			"style": {}
 		}
     ],
 	"globalStyle": {
@@ -255,7 +251,7 @@
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [{
 			"name": "表单", //模式名称
-			"path": "pages/index/index", //启动页面
+			"path": "pages/login/login", //启动页面
 			"query": "" //启动参数
 		}]
 	}

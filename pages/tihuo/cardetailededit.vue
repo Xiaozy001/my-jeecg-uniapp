@@ -1,4 +1,4 @@
-<template>
+<template id="cardetailededit">
 	<view>
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
@@ -217,7 +217,7 @@
 				uni.showLoading({
 					title:"处理中"
 				})
-					http.post(this.url, JSON.stringify(this.cardetaillistedit)).then(res => {
+				http.post(this.url, JSON.stringify(this.cardetaillistedit)).then(res => {
 						if (res.data.success) {
 							uni.hideLoading();
 							this.$tip.success('提交成功!')
@@ -242,7 +242,7 @@
 </script>
 <style>
 	.cu-form-group .title {
-		min-width: calc(4em + 15px);
+		min-width: calc(4em + 50px);
 	}
 	.cu-btn {
 		margin-top: 10px;

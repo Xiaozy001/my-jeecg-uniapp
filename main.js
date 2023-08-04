@@ -4,8 +4,8 @@ import store from './store'
 import MinCache from'./common/util/MinCache.js'
 import tip from'./common/util/tip.js'
 import configService from'./common/service/config.service.js'
-
 import router from './common/router'
+import './common/uni.css'
 import {RouterMount} from './plugin/uni-simple-router/index.js'
 
 // 注册缓存器

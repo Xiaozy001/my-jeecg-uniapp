@@ -12,7 +12,7 @@ const apiService = {
 	  * 手机号码登录
 	  */
 	phoneNoLogin(params) {
-		return http.post('/sys/phoneLogin',params);
+		return http.post('/sys/telLogin',params);
 	},
 	/**
 	  * 退出

@@ -23,7 +23,7 @@
 							@tap="onLogin"><text space="emsp">{{loading ? "登录中...":" 登录 "}}</text>
 						</button>
 						<button class="cu-btn line-blue lg margin-left shadow" :loading="loading" :class="[shape=='round'?'round':'']"
-							@tap="loginWay=3-loginWay">短信登录
+							@tap="loginWay=3-loginWay">手机号登录
 						</button>
 					</view>
 				</block>
@@ -33,15 +33,15 @@
                 		<input placeholder="请输入手机号" type="number" maxlength="11" v-model="phoneNo"></input>
                 	</view>
                 	<view class="cu-form-group margin-top shadow-warp" :class="[shape=='round'?'round':'']">
-                		<view class="title"><text class="cuIcon-lock margin-right-xs"></text>验证码:</view>
-                		<input class="uni-input" placeholder="请输入验证码" v-model="smsCode"/>
-                		<view class="action">
-                			<button class="cu-btn line-blue sm" :disabled="!isSendSMSEnable" @click="onSMSSend"> {{ getSendBtnText }}</button>
+                		<view class="title"><text class="cuIcon-lock margin-right-xs"></text>密&nbsp;&nbsp;&nbsp;码:</view>
+                		<input class="uni-input" placeholder="请输入密码" :password="!showPassword2" v-model="password2" />
+                		<view class="action text-lg">
+                		    <text :class="[showPassword2 ? 'cuIcon-attention' : 'cuIcon-attentionforbid']" @click="changePassword2"></text>
                 		</view>
                 	</view>
                 	<view class="padding text-center margin-top">
                 		<button class="cu-btn bg-blue lg margin-right shadow" :loading="loading" :class="[shape=='round'?'round':'']"
-                			@tap="onSMSLogin"><text space="emsp">{{loading ? "登录中...":" 登录 "}}</text>
+                			@tap="onTelLogin"><text space="emsp">{{loading ? "登录中...":" 登录 "}}</text>
                 		</button>
                 		<button class="cu-btn line-blue lg margin-left shadow" :loading="loading" :class="[shape=='round'?'round':'']"
                 			@tap="loginWay=1">账户登录
@@ -81,8 +81,10 @@
 				userName: '',
 				password: '',
 				phoneNo: '',
+				password2: '',
 				smsCode: '',
 				showPassword: false, //是否显示明文
+				showPassword2: false, //是否显示明文
 				loginWay: 1, //1: 账密，2：验证码
 				smsCountDown: 0,
 				smsCountInterval: null,
@@ -174,6 +176,9 @@
 			changePassword() {
 				this.showPassword = !this.showPassword;
 			},
+			changePassword2() {
+				this.showPassword2 = !this.showPassword2;
+			},
 			onSMSSend() {
 				let smsParams = {};
 				smsParams.mobile=this.phoneNo;
@@ -205,7 +210,7 @@
 				  }
 				}, 1000);
 			},
-			onSMSLogin() {
+			onTelLogin() {
 				let checkPhone = new RegExp(/^[1]([3-9])[0-9]{9}$/);
 				
 				if(!this.phoneNo || this.phoneNo.length==0){
@@ -216,13 +221,13 @@
 					this.$tip.toast('请输入正确的手机号');
 					return false
 				}
-				if(!this.smsCode || this.smsCode.length==0){
-				  this.$tip.toast('请填短信验证码');
+				if(!this.password2 || this.password2.length==0){
+				  this.$tip.toast('请填登录密码');
 				  return;
 				}
 				let loginParams = {
 				  mobile:this.phoneNo,
-				  captcha:this.smsCode
+				  password:this.password2
 				};
 				this.PhoneLogin(loginParams).then((res) => {
 				  console.log("res====》",res)
@@ -258,6 +263,9 @@
         padding-top: 100upx;
     }
 
+	.uni-input {
+		padding: 0px 0px !important;
+	}
     .zai-box {
         padding: 0 20upx;
         padding-top: 100upx;

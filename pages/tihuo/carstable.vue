@@ -1,4 +1,4 @@
-<template>
+<template id="carstable">
 	<view>
 		<cu-custom bgColor="bg-gradual-pink" :isBack="true">
 			<block slot="backText">返回</block>
@@ -266,5 +266,11 @@
 <style>
 	.cu-form-group .title {
 		min-width: calc(4em + 15px);
+	}
+	.uni-input {
+		padding: 0px 0px !important;
+	}
+	.cu-form-group uni-picker::after {
+		display: none;
 	}
 </style>

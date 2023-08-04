@@ -115,13 +115,6 @@ const routes = [
   }
 }, 
 {
-  path: '/pages/common/helloWorld',
-  name: 'helloWorld',
-  meta: {
-    title: 'helloWorld'
-  }
-}, 
-{
   path: '/pages/tihuo/carstable',
   name: 'carstable',
   meta: {
@@ -161,20 +154,6 @@ const routes = [
   name: 'carlistdetailed',
   meta: {
     title: '订单详细信息'
-  }
-}, 
-{
-  path: '/pages/tihuo/loadinfo',
-  name: 'loadinfo',
-  meta: {
-    title: '装车信息'
-  }
-}, 
-{
-  path: '/pages/tihuo/loadinfolist',
-  name: 'loadinfolist',
-  meta: {
-    title: '装车信息'
   }
 }, 
 {
@@ -225,5 +204,20 @@ const routes = [
   meta: {
     title: '资质申请'
   }
-}]
+},
+{
+  path: '/pages/tihuo/transportcertificationhandle',
+  name: 'transportcertificationhandle',
+  meta: {
+    title: '资质审核明细'
+  }
+},
+{
+  path: '/pages/tihuo/transportcertificationlist',
+  name: 'transportcertificationlist',
+  meta: {
+    title: '资质审核'
+  }
+}
+]
 export default routes
