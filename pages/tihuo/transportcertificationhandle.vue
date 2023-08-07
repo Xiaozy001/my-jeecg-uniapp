@@ -34,32 +34,39 @@
 	<view class="uni-list list-pd">
 		<view class="uni-list-cell cell-pd">
 			<view class="uni-uploader">
-				<block v-for="(image,index) in imagesList" :key="index">
-					<view class="uni-uploader__file">
-						<text>图片文件</text>
-						<image class="uni-uploader__img" :src="image" :data-src="image" @tap="previewImage"></image>
+				<view class="uni-uploader-head">
+					<view class="uni-uploader-title">图片文件</view>
+				</view>
+				<view class="uni-uploader-body">
+					<view class="uni-uploader__files">
+						<block v-for="(image,index) in imagesList" :key="index">
+							<view class="uni-uploader__file">
+								<image class="uni-uploader__img" :src="image" :data-src="image" @tap="previewImage"></image>
+							</view>
+						</block>
 					</view>
-				</block>
+				</view>
 			</view>
 		</view>
 	</view>
 	<view class="uni-list list-pd">
 		<view class="uni-list-cell cell-pd">
 			<view class="uni-uploader">
-				<view class="uni-uploader__file">
-					<text>其他文件</text>
-					<li v-for="(file,index) in filesList" :key="index">
-						<view class="uni-uploader__file" width="100%">
-							<a @click="downloadFile(file)">{{file.filename}}</a>
-						</view>
-					</li>
+				<view class="uni-uploader-head">
+					<view class="uni-uploader-title">其他文件</view>
 				</view>
+				<view class="uni-uploader-body">
+					<view class="uni-uploader__files">
+						<uni-file-picker readonly :value="filesList" :listStyles="listStyles" file-mediatype="all">
+						</uni-file-picker>
+					</view>
+				</view>	
 			</view>
 		</view>
 	</view>
 	<view class="padding flex flex-direction">
-		<button class="cu-btn bg-blue lg"  @click="onSubmit">同意</button>
-		<button class="cu-btn"  @click="onReset">否决</button>
+		<button :disabled ="ishandle" class="cu-btn bg-blue lg"  @click="onSubmit(1)">同意</button>
+		<button :disabled ="ishandle" class="cu-btn"  @click="onSubmit(0)">否决</button>
 	</view>
 	</form>
 	</view>
@@ -74,18 +81,35 @@
 	export default {
 		data() {
 			return {
-				url : '/cartransport/carTransport/queryById?id=',
-				array: [{name:'一个月'},{name:'三个月'},{name:'半年'},{name:'一年'}],
+				url: '/cartransport/carTransport/queryById?id=',
+				submiturl: '/cartransport/carTransport/appSubmit',
+				handleurl: '/cartransport/carTransport/appHandle',
 				relTenantIds: 0,
+				ishandle: true,
 				imagesList: [],
 				filesList: [],
 				transport: {
+					id:'',
 					transCompanyName: '',
 					transCompanyPeople: '',
 					transCompanyTelnum: '',
 					effectiveTime:'',
 					imageFiles: '',
 					otherFiles: '',
+					confirm:'',
+				},
+				listStyles: {
+					// 是否显示边框
+					border: true,
+					// 是否显示分隔线
+					dividline: true,
+					// 线条样式
+					borderStyle: {
+						width: 1,
+						color: 'blue',
+						style: 'dashed',
+						radius: 2
+					}
 				},
 			}
 		},
@@ -96,6 +120,20 @@
 			this.queryTransport(e.data);
 		},
 		methods: {
+			queryHandle() {
+				this.$http.get(this.handleurl).then(res => {
+					if (res.data.success && this.transport.confirm == null) {
+						this.ishandle = false
+					} else {
+						if(!res.data.success){
+						this.$tip.alert(res.data.message);
+						}else{
+						this.$tip.alert("当前单据已审核");
+						}
+					}
+				})
+			},
+			
 			queryTransport(id) {
 				let that = this
 				uni.showLoading({
@@ -106,6 +144,7 @@
 						uni.hideLoading();
 						console.log(res.data);
 						this.transport = res.data.result;
+						this.queryHandle();
 					} else {
 						uni.hideLoading();
 						this.$tip.alert(res.data.message);
@@ -123,7 +162,8 @@
 				})
 				filelist.forEach((res) => {
 					let file = {
-						filename: res,
+						name: res,
+						extname: res.split('.').pop(),
 						fileurl: fileurl.concat(res)
 					}
 					this.filesList.push(file)
@@ -140,47 +180,26 @@
 				})
 			},
 			
-			downloadFile(file) {
-				 let filePath = 'file://storage/emulated/0/downloads/' + file.filename
-				uni.downloadFile({
-					url: file.fileurl,
-					success(res) {
-						if(res.statusCode === 200) {
-							uni.saveFile({
-								tempFilePath:res.tempFilePath,
-								filePath: filePath,
-								success(saveRes) {
-									uni.showToast({
-										title:"文件下载成功",
-										icon:'success'
-									});
-									console.log(saveRes.savedFilePath)
-								},
-								fail(saveErr) {
-									uni.showToast({
-										title:"文件下载失败",
-										icon:'none'
-									});
-									console.log(saveErr)
-								}
-							});
-						}else {
-							uni.showToast({
-								title:"文件下载失败",
-								icon:'none'
-							});
-							console.log(res)
-						}
-					},
-					fail(err) {
-						uni.showToast({
-							title:"文件下载失败",
-							icon:'none'
-						});
-						console.log(err)
+			onSubmit(state) {
+				let that=this
+				uni.showLoading({
+					title:"处理中"
+				})
+				this.$http.get(that.submiturl,{params:{"state":state,"id":that.transport.id}}).then(res => {
+					if (res.data.success) {
+						uni.hideLoading();
+						this.$tip.success('审核成功!')
+						this.$Router.replaceAll({
+							name: 'transportcertificationlist'
+						})
+					} else {
+						uni.hideLoading();
+						this.$tip.alert(res.data.message);
 					}
 				})
-			},
+			}
+			
+			
 			}
 		}
 </script>

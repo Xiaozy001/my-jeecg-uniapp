@@ -27,8 +27,8 @@
 	</view>
 	<view class="cu-form-group" >
 		<view class="title">申请有效时间:</view>
-			<picker @change="bindPickerChange" :value="this.relTenantIds" :range="array" range-key="name">
-				<view class="uni-input">{{array[this.relTenantIds].name}}</view>
+			<picker @change="bindPickerChange" :value="relTenantIds" :range="array" range-key="name">
+				<view class="uni-input">{{array[relTenantIds].name}}</view>
 			</picker>
 	</view>
 	<view class="uni-list list-pd">
@@ -50,6 +50,7 @@
 			<view class="uni-uploader">
 				<uni-file-picker
 				title="其他附件上传(护送方案等)"
+				file-extname="doc,docx,pdf,txt"
 				limit="9"
 				file-mediatype="all"
 				@select="selectFiles"
@@ -96,7 +97,9 @@
 		methods: {
 			//选择有效期
 			bindPickerChange(e){
-				this.relTenantIds = e.detail.value;
+				let that = this
+				that.relTenantIds = e.detail.value;
+				console.log(that.array[that.relTenantIds].name)
 			},
 			
 			//选择图片
@@ -137,7 +140,7 @@
 			deleteFile(e){
 				console.log(e)
 				let that = this
-				that.filesList = that.transport.filesList.filter((file) => file == e)
+				that.filesList = that.filesList.filter((file) => file == e)
 				console.log(that.filesList)
 			},
 

@@ -23,13 +23,10 @@
 	</view>
 	<view class="cu-form-group" >
 		<view class="title">运输公司:</view>
-		<input name="input" v-model="carsData.tranCompany" placeholder="请输入运输公司" />
+		<picker  @change="changeTransport" :range="transportCompanyList">
+			<view class="uni-input">{{this.carsData.tranCompany}}</view>
+		</picker>
 	</view>
-	
-	<!-- <view class="cu-form-group margin-top" >
-		<view class="title">车型:</view>
-		<input name="input" v-model="carsData.carType" placeholder="请输入车型" />
-	</view> -->
 	<view class="cu-form-group" >
 		<view class="title">提货工厂:</view>
 			<picker @change="bindPickerChange" :value="carsData.relTenantIds" :range="array" range-key="name">
@@ -52,15 +49,6 @@
 		<view class="title">型号:</view>
 		<input name="input" v-model="carsData.type" placeholder="请输入型号" />
 	</view>
-
-	<!-- <view class="cu-form-group" >
-		<view class="title">车长:</view>
-		<input name="input" v-model="carsData.carLen" placeholder="请输入车长" />
-	</view>
-	<view class="cu-form-group" >
-		<view class="title">车重:</view>
-		<input name="input" v-model="carsData.carWei" placeholder="请输入车重" />
-	</view> -->
 	<view>
 	  <my-date label="提货函时间：" v-model="carsData.pickTime" placeholder="请选择提货函时间" fields="minute"></my-date>
 	</view>
@@ -87,7 +75,9 @@
 		data() {
 			return {
 				url : '/carsorder/carsOrder/appAdd',
+				transportUrl:'/cartransport/carTransport/appTransList',
 				array: [{name:'---请选择工厂---'},{name:'动力谷工厂'},{name:'天津工厂'},{name:'光明工厂'},{name:'射阳工厂'},{name:'蒙西工厂'},{name:'吉林工厂'},{name:'宾县工厂'}],
+				transportCompanyList:[],
 				carsData: {
 					peoName: '',
 					telNum: '',
@@ -107,19 +97,36 @@
 			this.addloadTime();
 			console.log("调用定位")
 			this.getLocation();	
+			this.getTransportCompany();
 		},
 		methods: {
+			
+			changeTransport(e) {
+				this.carsData.tranCompany=this.transportCompanyList[e.detail.value]
+			},
+			
+			getTransportCompany() {
+				this.$http.get(this.transportUrl).then(res => {
+					if (res.data.success) {
+						this.transportCompanyList=this.transportCompanyList.concat(res.data.result),
+						console.log("this.transportCompanyList",this.transportCompanyList)
+					} else {
+						this.$tip.alert(res.data.message);
+					}
+				})
+			},
+			
 			bindPickerChange(e){
 				this.carsData.relTenantIds = e.detail.value;
 				console.log(this.carsData)
 			},
-			addZero(s) {
-				return s<10 ? ('0'+s) : s;
-			},
+			
+			
 			addloadTime() {
 				var nowtime=new Date();
 				this.carsData.loadTime = moment(nowtime).format('YYYY-MM-DD HH:mm:ss');
 			},
+			
 			onSubmit(){
 				console.log(this.carsData.address)
 				if(this.carsData.peoName==''){
@@ -130,7 +137,7 @@
 					this.$tip.alert("司机电话不能为空");
 					return 
 				}
-				if(this.carsData.tranCompany==''){
+				if(this.carsData.tranCompany=='' || this.carsData.tranCompany=='---请选择运输公司---'){
 					 this.$tip.alert("运输公司不能为空");
 					 return 
 				}
@@ -186,6 +193,7 @@
 					  this.$tip.alert(msg);
 			        })
 			},
+			
 			onReset(){
 				this.carsData.peoName='',
 				this.carsData.cusName='',

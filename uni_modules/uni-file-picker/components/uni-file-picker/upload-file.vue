@@ -10,7 +10,7 @@
 			<view class="uni-file-picker__lists-box" v-for="(item ,index) in list" :key="index" :class="{
 				'files-border':index !== 0 && styles.dividline}"
 			 :style="index !== 0 && styles.dividline &&borderLineStyle">
-				<view class="uni-file-picker__item">
+				<view class="uni-file-picker__item" @click.stop="downloadFile(index)">
 					<!-- :class="{'is-text-image':showType === 'list'}" -->
 					<!-- 	<view class="files__image is-text-image">
 						<image class="header-image" :src="item.logo" mode="aspectFit"></image>
@@ -156,6 +156,53 @@
 					item,
 					index
 				})
+			},
+			downloadFile(index) {
+				if(this.readonly){
+					var url = this.filesList[index].fileurl;
+					var fileType = this.filesList[index].name.split('.').pop();
+					console.log(fileType)
+				uni.downloadFile({
+					url: url,
+					success(res) {
+						if(res.statusCode === 200) {
+							uni.openDocument({
+								filePath: res.tempFilePath,
+								fileType: fileType,
+								showMenu: true,
+								success(res) {
+									uni.showToast({
+										title:"文件打开成功",
+										icon:'success'
+									});
+								},
+								fail(saveErr) {
+									uni.showToast({
+										title:"文件打开失败",
+										icon:'none'
+									});
+									console.log(saveErr)
+								}
+							});
+						}else {
+							uni.showToast({
+								title:"文件下载失败",
+								icon:'none'
+							});
+							console.log(res)
+						}
+					},
+					fail(err) {
+						uni.showToast({
+							title:"文件下载失败",
+							icon:'none'
+						});
+						console.log(err)
+					}
+				})
+				}else{
+					 return
+				}
 			},
 			choose() {
 				this.$emit("choose")

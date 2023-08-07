@@ -81,7 +81,8 @@
         "appid" : "wxa30490c150bdbdd5",
         "setting" : {
             "urlCheck" : false,
-            "es6" : true
+            "es6" : true,
+            "minified" : true
         },
         "permission" : {
             "scope.userLocation" : {
@@ -93,6 +94,11 @@
     "h5" : {
         "title" : "发货小程序",
         "domain" : "myhjdc.cn"
+    },
+    "mp-qq" : {
+        "setting" : {
+            "minified" : false
+        }
     }
 }
 /* SDK配置 */
