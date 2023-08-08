@@ -162,7 +162,7 @@
 					var url = this.filesList[index].fileurl;
 					var fileType = this.filesList[index].name.split('.').pop();
 					console.log(fileType)
-				uni.downloadFile({
+					uni.downloadFile({
 					url: url,
 					success(res) {
 						if(res.statusCode === 200) {

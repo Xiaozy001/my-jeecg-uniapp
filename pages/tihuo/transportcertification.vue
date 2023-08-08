@@ -50,9 +50,10 @@
 			<view class="uni-uploader">
 				<uni-file-picker
 				title="其他附件上传(护送方案等)"
-				file-extname="doc,docx,pdf,txt"
+				file-extname="doc,xls,ppt,pdf,docx,xlsx,pptx"
 				limit="9"
 				file-mediatype="all"
+				:auto-upload="false"
 				@select="selectFiles"
 				@delete="deleteFile"
 				></uni-file-picker>
@@ -78,6 +79,7 @@
 			return {
 				url : '/cartransport/carTransport/add',
 				array: [{name:'一个月'},{name:'三个月'},{name:'半年'},{name:'一年'}],
+				seq: 1,
 				relTenantIds: 0,
 				imagesList: [],
 				filesList: [],
@@ -144,47 +146,54 @@
 				console.log(that.filesList)
 			},
 
-			upLoadImageFile(List) {
-				return new Promise((resolve,reject) => {
-					let url = config.apiUrl + '/sys/common/upload'
-					var task = uni.uploadFile({
-							url: url, //仅为示例，非真实的接口地址
-							files: List,
-							name: 'file',
-							formData: {
-								'user': 'test'
-							},
-							success: (uploadFileRes) => {
-								resolve(uploadFileRes)
-							},
-							fail: (uploadFileRes) => {
-								reject(uploadFileRes)
-							}
+			//文件上传
+			upLoadFile(List) {
+				let imageurl = '/sys/common/upload'
+				console.log("uploadfile",List)	
+				var promises = List.map((file) => {
+					return new Promise((resolve,reject) => {
+						this.$http.upload(this.$config.apiUrl + imageurl,file,{
+										filePath: file.path,
+										name: 'file',
+									}).then(res => {
+										if(res.statusCode ==200){
+											resolve(res)
+										}else{
+											reject(res)
+										}
+									}).catch((err) =>{
+									  let msg = err.data.message || "请求出现错误，请稍后再试"
+									  this.$tip.alert(msg);
 						})
+					})
+				})
+				return promises
+			},
+			
+			//文件上传校验
+			fileUpload(result,Type) {
+				let that = this
+				result.forEach( (Res) => {
+					if(!Res.statusCode == 200){
+						if(Type == 'image'){
+							that.$tip.alert("图片" + file.name + "上传错误");
+							that.transport.imageFiles="";
+						}else{
+							that.$tip.alert("文件" + file.name + "上传错误");
+							that.transport.otherFiles=""
+						}
+					}else{
+						if(Type == 'image')
+						{
+							that.transport.imageFiles = that.transport.imageFiles + Res.data.message;
+						}else{
+							that.transport.otherFiles = that.transport.otherFiles + Res.data.message;
+						}
+					}
 				})
 			},
 			
-			upLoadOtherFile(List) {
-				return new Promise((resolve,reject) => {
-					let url = config.apiUrl + '/sys/common/upload'
-					uni.uploadFile({
-							url: url, //仅为示例，非真实的接口地址
-							files: List,
-							name: 'file',
-							formData: {
-								'user': 'test'
-							},
-							success: (uploadFileRes) => {
-								resolve(uploadFileRes)
-							},
-							fail: (uploadFileRes) => {
-								reject(uploadFileRes)
-							}
-						})
-					})
-			},
-			
-			async onSubmit() {
+			 async onSubmit() {
 				if(this.transport.traName==''){
 					this.$tip.alert("运输公司名称不能为空");
 					return 
@@ -221,44 +230,34 @@
 					this.$tip.alert("请选择对应的护送方案等");
 					return
 				}
-				const imageRes = await this.upLoadImageFile(this.imagesList)
-				if(!imageRes.statuscode == 200)
-				{
-					this.$tip.alert("上传图片错误");
-					return
-				}
-				this.transport.imageFiles = JSON.parse(imageRes.data).message
-				const fileRes = await this.upLoadOtherFile(this.filesList)
-				if(!fileRes.statuscode == 200)
-				{
-					this.$tip.alert("上传文件错误");
-					return
-				}
-				this.transport.otherFiles = JSON.parse(fileRes.data).message
+				var imageResult = await Promise.all(this.upLoadFile(this.imagesList))
+				this.fileUpload(imageResult,'image')
+				var fileResult = await Promise.all(this.upLoadFile(this.filesList))
+				this.fileUpload(fileResult,'file')
+				console.log("this.transport",this.transport)
 				uni.showLoading({
 					title:"处理中"
 				});
-				console.log(this.transport)
 				http.post(this.url,JSON.stringify(this.transport)).then(res=>{
 					if(res.data.success){
 						uni.hideLoading();
 						setTimeout(() => {
 						  uni.showToast({
-						    title: res.data.message,
-						    icon: "success",
-						    mask: true,
-						    duration: 3000
+							title: res.data.message,
+							icon: "success",
+							mask: true,
+							duration: 3000
 						  });
 						}, 300);
 						 this.$Router.replaceAll({name:'index'})
 					}else{
-			              this.$tip.alert(res.data.message);
-			            }
+						  this.$tip.alert(res.data.message);
+						}
 				}).catch((err) =>{
 					uni.hideLoading();
-			          let msg = err.data.message || "请求出现错误，请稍后再试"
+					  let msg = err.data.message || "请求出现错误，请稍后再试"
 					  this.$tip.alert(msg);
-			        })
+				})
 			},
 			onReset(){
 				this.transport = {}
