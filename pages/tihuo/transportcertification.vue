@@ -152,8 +152,8 @@
 				console.log("uploadfile",List)	
 				var promises = List.map((file) => {
 					return new Promise((resolve,reject) => {
-						this.$http.upload(this.$config.apiUrl + imageurl,file,{
-										filePath: file.path,
+						this.$http.upload(this.$config.apiUrl + imageurl,{
+										filePath: file.file.path,
 										name: 'file',
 									}).then(res => {
 										if(res.statusCode ==200){
@@ -281,5 +281,9 @@
 	
 	.list-pd {
 		margin-top: 50rpx;
+	}
+	
+	.cu-form-group uni-picker::after {
+		display: none;
 	}
 </style>
